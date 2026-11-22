@@ -1,80 +1,400 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="سياسة خصوصية تطبيق WeProductivity" />
   <title>سياسة الخصوصية – WeProductivity</title>
   <style>
-    :root { color-scheme: dark; }
-    html, body { min-height: 100%; margin: 0; }
-    body {
-      display: grid;
-      place-items: center;
-      padding: 2rem;
-      background: #0a0f1e;
-      color: #e8eaf6;
-      font-family: sans-serif;
-      text-align: center;
-      line-height: 1.8;
-    }
-    p { max-width: 38rem; }
-  </style>
-</head>
-<body dir="rtl">
-  <main>
-    <h1>جاري استعادة سياسة الخصوصية…</h1>
-    <p id="status">يتم تحميل النسخة الأصلية من الصفحة.</p>
-  </main>
-  <script>
-    (async () => {
-      const sourceUrl = 'https://raw.githubusercontent.com/TTaMMeRR/we-productivity-privacy/38461c4ec1f40f1f9158d3a4cdad35a888c87c4b/index.html';
-      const status = document.getElementById('status');
-      try {
-        const response = await fetch(sourceUrl, { cache: 'no-store' });
-        if (!response.ok) throw new Error(`HTTP ${response.status}`);
-        let html = await response.text();
+    @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap');
 
-        // Drop the broad, duplicated RTL rule and replace the old trailing overrides.
-        html = html.replace(/\s*main\s*\*\s*\{\s*direction:\s*rtl;\s*text-align:\s*right;\s*\}/, '');
-        const oldOverrides = /\/\* ===== إجبار اتجاه RTL في المحتوى ===== \*\/[\s\S]*?(?=<\/style>)/;
-        const rtlRules = `
-    /* RTL layout: isolated, predictable rules for the page content. */
-    html, body, main { direction: rtl; }
-    main { text-align: right; }
-    main .section-card, main .contact-card, main .highlight-box { text-align: right; }
-    main .section-header {
+    :root {
+      --primary: #0057e7;
+      --accent: #00c6ff;
+      --accent2: #7b2ff7;
+      --bg: #0a0f1e;
+      --card-bg: rgba(255,255,255,.04);
+      --card-border: rgba(255,255,255,.08);
+      --text: #e8eaf6;
+      --muted: #8892b0;
+      --success: #00e676;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html { direction: rtl; scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      overflow-x: hidden;
       direction: rtl;
+      font-family: 'Cairo', sans-serif;
+      line-height: 1.8;
+      color: var(--text);
+      background: var(--bg);
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(ellipse 80% 60% at 20% 10%, rgba(0,87,231,.18), transparent 60%),
+        radial-gradient(ellipse 60% 50% at 80% 80%, rgba(123,47,247,.15), transparent 60%),
+        radial-gradient(ellipse 50% 40% at 50% 50%, rgba(0,198,255,.08), transparent 60%);
+    }
+
+    .particles { position: fixed; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; }
+    .particle { position: absolute; border-radius: 50%; animation: float linear infinite; opacity: 0; }
+    @keyframes float {
+      0% { transform: translateY(100vh) scale(0); opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: .6; }
+      100% { transform: translateY(-10vh) scale(1); opacity: 0; }
+    }
+
+    header {
+      position: relative;
+      z-index: 1;
+      overflow: hidden;
+      padding: 72px 20px 56px;
+      text-align: center;
+      direction: rtl;
+    }
+    .header-glow {
+      position: absolute;
+      top: -60px;
+      left: 50%;
+      width: 600px;
+      height: 300px;
+      transform: translateX(-50%);
+      background: radial-gradient(ellipse, rgba(0,198,255,.2), transparent 70%);
+      pointer-events: none;
+    }
+    .logo-wrapper { position: relative; display: flex; flex-direction: column; align-items: center; gap: 12px; margin-bottom: 24px; }
+    .logo-img {
+      width: 64px;
+      height: 64px;
+      border-radius: 18px;
+      object-fit: cover;
+      box-shadow: 0 0 30px rgba(0,198,255,.4), 0 0 60px rgba(0,87,231,.2);
+      animation: pulse-glow 3s ease-in-out infinite;
+    }
+    @keyframes pulse-glow {
+      0%, 100% { box-shadow: 0 0 30px rgba(0,198,255,.4), 0 0 60px rgba(0,87,231,.2); }
+      50% { box-shadow: 0 0 50px rgba(0,198,255,.7), 0 0 90px rgba(0,87,231,.4); }
+    }
+    .app-name {
+      font-size: clamp(28px, 5vw, 42px);
+      font-weight: 900;
+      letter-spacing: -1px;
+      background: linear-gradient(90deg, #fff, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .update-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 18px;
+      border: 1px solid rgba(0,230,118,.3);
+      border-radius: 100px;
+      background: rgba(0,230,118,.1);
+      color: var(--success);
+      font-size: 14px;
+      font-weight: 600;
+    }
+    .update-badge::before {
+      content: '';
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--success);
+      animation: blink 1.5s ease-in-out infinite;
+    }
+    @keyframes blink { 50% { opacity: .2; } }
+    h1.page-title { margin: 0 0 12px; color: #fff; font-size: clamp(22px, 4vw, 36px); font-weight: 700; }
+    .header-desc { max-width: 600px; margin: 20px auto 0; color: var(--muted); font-size: 16px; }
+    .divider { position: relative; z-index: 1; width: min(100% - 40px, 800px); height: 1px; margin: 0 auto 60px; background: linear-gradient(90deg, transparent, var(--accent), transparent); }
+
+    main {
+      position: relative;
+      z-index: 1;
+      width: min(100%, 900px);
+      margin-inline: auto;
+      padding: 0 20px 80px;
+      direction: rtl;
+      text-align: right;
+    }
+    .section-card, .contact-card {
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 28px;
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      background: var(--card-bg);
+      text-align: right;
+      backdrop-filter: blur(10px);
+    }
+    .section-card { padding: 32px 36px; transition: transform .3s ease, border-color .3s ease, box-shadow .3s ease; }
+    .section-card:hover { transform: translateY(-3px); border-color: rgba(0,198,255,.3); box-shadow: 0 20px 60px rgba(0,0,0,.3), 0 0 30px rgba(0,198,255,.08); }
+    .section-card::before {
+      content: '';
+      position: absolute;
+      inset: 0 0 auto;
+      height: 2px;
+      opacity: 0;
+      background: linear-gradient(90deg, transparent, var(--accent), var(--accent2), transparent);
+      transition: opacity .3s ease;
+    }
+    .section-card:hover::before { opacity: 1; }
+
+    /* RTL card headings: first child (number) stays at the right, title follows it. */
+    .section-header {
       display: flex;
       flex-direction: row;
-      justify-content: flex-start;
       align-items: center;
-      column-gap: 14px;
-      text-align: right;
-    }
-    main .section-number { margin: 0; }
-    main .section-title { text-align: right; }
-    main ul.policy-list, main ol { direction: rtl; text-align: right; }
-    main ul.policy-list li {
+      justify-content: flex-start;
+      gap: 14px;
+      margin-bottom: 20px;
       direction: rtl;
-      flex-direction: row;
       text-align: right;
     }
-    main ol {
-      list-style-position: inside;
-      padding-inline-start: 0;
+    .section-number {
+      display: inline-flex;
+      flex: 0 0 40px;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      box-shadow: 0 4px 15px rgba(0,87,231,.4);
+      color: #fff;
+      font-size: 18px;
+      font-weight: 900;
     }
-    main .section-intro, main .list-label { text-align: right; }
-`;
-        if (!oldOverrides.test(html)) throw new Error('Could not locate the RTL style section in the source page.');
-        html = html.replace(oldOverrides, rtlRules);
-        document.open();
-        document.write(html);
-        document.close();
-      } catch (error) {
-        status.textContent = 'تعذر تحميل النسخة الأصلية تلقائيًا. يرجى إعادة المحاولة أو استعادة الملف من سجل GitHub.';
-        console.error('Privacy page recovery failed:', error);
+    .section-title { margin: 0; color: #fff; font-size: 20px; font-weight: 700; text-align: right; }
+    .section-intro { margin: 0 0 18px; color: rgba(232,234,246,.8); font-size: 15px; text-align: right; }
+
+    /* Custom list markers are flex items at the RTL start edge (right). */
+    ul.policy-list, ol.policy-list {
+      margin: 0;
+      padding: 0;
+      direction: rtl;
+      text-align: right;
+      list-style: none;
+    }
+    ul.policy-list li, ol.policy-list li {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(255,255,255,.05);
+      color: rgba(232,234,246,.88);
+      font-size: 15px;
+      direction: rtl;
+      text-align: right;
+    }
+    ul.policy-list li:last-child, ol.policy-list li:last-child { border-bottom: 0; }
+    .list-dot {
+      flex: 0 0 8px;
+      width: 8px;
+      height: 8px;
+      margin-top: 9px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+    }
+    .list-label { color: var(--accent); font-weight: 700; }
+    .numbered-list { counter-reset: policy-step; }
+    .numbered-list li { counter-increment: policy-step; }
+    .numbered-list li::before {
+      content: counter(policy-step) ".";
+      flex: 0 0 1.5em;
+      color: var(--accent);
+      font-weight: 700;
+      text-align: right;
+    }
+
+    .perm-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; direction: rtl; }
+    .perm-item { padding: 20px; border: 1px solid rgba(0,87,231,.2); border-radius: 14px; background: rgba(0,87,231,.08); text-align: right; transition: background .3s ease, border-color .3s ease, transform .3s ease; }
+    .perm-item:hover { transform: scale(1.02); border-color: rgba(0,198,255,.4); background: rgba(0,198,255,.12); }
+    .perm-icon { display: block; margin-bottom: 10px; font-size: 32px; }
+    .perm-name { margin-bottom: 6px; color: #fff; font-size: 15px; font-weight: 700; }
+    .perm-desc { color: var(--muted); font-size: 13px; }
+    .security-row { display: flex; flex-wrap: wrap; justify-content: flex-start; gap: 12px; margin-top: 16px; direction: rtl; }
+    .sec-badge { display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; border: 1px solid rgba(0,230,118,.25); border-radius: 100px; background: rgba(0,230,118,.08); color: var(--success); font-size: 13px; font-weight: 600; }
+    .highlight-box { display: flex; flex-direction: row; align-items: flex-start; gap: 14px; margin-bottom: 18px; padding: 20px 24px; border: 1px solid rgba(123,47,247,.3); border-radius: 14px; background: linear-gradient(135deg, rgba(123,47,247,.12), rgba(0,87,231,.12)); direction: rtl; text-align: right; }
+    .highlight-icon { flex: 0 0 auto; font-size: 28px; }
+    .highlight-text { color: rgba(232,234,246,.9); font-size: 15px; font-weight: 600; }
+
+    .contact-card { padding: 32px 36px; border-color: rgba(0,198,255,.25); background: linear-gradient(135deg, rgba(0,87,231,.15), rgba(0,198,255,.08)); }
+    .contact-title { margin: 0 0 18px; color: #fff; font-size: 22px; font-weight: 700; }
+    .contact-links { display: flex; flex-wrap: wrap; justify-content: flex-start; gap: 16px; direction: rtl; }
+    .contact-link { display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 12px 24px; border-radius: 100px; color: #fff; text-decoration: none; font-size: 15px; font-weight: 700; transition: transform .3s ease, box-shadow .3s ease; }
+    .contact-link:hover { transform: translateY(-2px); }
+    .contact-link.whatsapp { background: linear-gradient(135deg, #25d366, #128c7e); box-shadow: 0 4px 20px rgba(37,211,102,.3); }
+    .contact-link.email { background: linear-gradient(135deg, var(--primary), var(--accent)); box-shadow: 0 4px 20px rgba(0,87,231,.3); }
+
+    footer { position: relative; z-index: 1; padding: 28px 20px 44px; border-top: 1px solid rgba(255,255,255,.06); color: var(--muted); font-size: 13px; text-align: center; }
+    footer strong { color: var(--accent); }
+    .progress-bar { position: fixed; inset: 0 0 auto; z-index: 10; height: 3px; transform: scaleX(0); transform-origin: right; background: linear-gradient(90deg, var(--primary), var(--accent), var(--accent2)); transition: transform .1s linear; }
+    .scroll-top { position: fixed; inset: auto auto 24px 24px; z-index: 9; display: grid; place-items: center; width: 48px; height: 48px; border: 0; border-radius: 50%; background: linear-gradient(135deg, var(--primary), var(--accent)); box-shadow: 0 4px 20px rgba(0,87,231,.4); color: #fff; font-size: 20px; cursor: pointer; opacity: 0; pointer-events: none; transform: translateY(16px); transition: opacity .3s ease, transform .3s ease; }
+    .scroll-top.visible { opacity: 1; pointer-events: auto; transform: translateY(0); }
+    .fade-in { opacity: 0; transform: translateY(24px); transition: opacity .6s ease, transform .6s ease; }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 600px) {
+      header { padding-top: 56px; }
+      .section-card, .contact-card { padding: 24px 20px; }
+      .perm-grid { grid-template-columns: 1fr 1fr; }
+      .contact-links { flex-direction: column; align-items: stretch; }
+      .contact-link { width: 100%; }
+      .scroll-top { inset-inline-start: 16px; bottom: 16px; }
+    }
+    @media (max-width: 380px) { .perm-grid { grid-template-columns: 1fr; } }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+      .particle { display: none; }
+      .fade-in { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="progress-bar" id="progressBar" aria-hidden="true"></div>
+  <div class="particles" id="particles" aria-hidden="true"></div>
+
+  <header>
+    <div class="header-glow" aria-hidden="true"></div>
+    <div class="logo-wrapper">
+      <img src="icon.png" alt="شعار WeProductivity" class="logo-img">
+      <div class="app-name">WeProductivity</div>
+      <div class="update-badge">آخر تحديث: 1 نوفمبر 2025</div>
+    </div>
+    <h1 class="page-title">سياسة الخصوصية</h1>
+    <p class="header-desc">نلتزم بحماية خصوصيتك وأمان بياناتك. تعرّف على كيفية جمع واستخدام وحماية معلوماتك.</p>
+  </header>
+
+  <div class="divider" aria-hidden="true"></div>
+
+  <main>
+    <section class="section-card fade-in" aria-labelledby="section-1-title">
+      <div class="section-header"><span class="section-number">1</span><h2 class="section-title" id="section-1-title">البيانات التي نقوم بجمعها</h2></div>
+      <p class="section-intro">يقوم التطبيق بجمع وتجهيز البيانات التالية لضمان تقديم خدمات إدارة وتوثيق الإنتاجية بكفاءة:</p>
+      <ul class="policy-list">
+        <li><span class="list-dot" aria-hidden="true"></span><div><span class="list-label">بيانات الحساب والهوية:</span> اسم المستخدم، رقم العامل (Worker ID)، البريد الإلكتروني، وبيانات تسجيل الدخول اللازمة للتحقق من الهوية وإدارة الحساب.</div></li>
+        <li><span class="list-dot" aria-hidden="true"></span><div><span class="list-label">بيانات إدخال الإنتاجية:</span> اسم السنترال، تصنيف العمل، نوع المهمة، وصف المهمة، وبيانات الإنجاز التي يدخلها المستخدم.</div></li>
+        <li><span class="list-dot" aria-hidden="true"></span><div><span class="list-label">الصورة الشخصية (اختياري):</span> في حال رفع المستخدم صورة شخصية لملفه، تُستخدم لعرضها ضمن الملف الشخصي.</div></li>
+        <li><span class="list-dot" aria-hidden="true"></span><div><span class="list-label">بيانات الجهاز والتشغيل:</span> سجلات الأخطاء والتقارير الفنية اللازمة لتشخيص المشكلات وتحسين استقرار التطبيق.</div></li>
+      </ul>
+    </section>
+
+    <section class="section-card fade-in" aria-labelledby="section-2-title">
+      <div class="section-header"><span class="section-number">2</span><h2 class="section-title" id="section-2-title">كيفية استخدام البيانات</h2></div>
+      <p class="section-intro">نستخدم البيانات التي نجمعها للأغراض التشغيلية والإدارية التالية:</p>
+      <ul class="policy-list">
+        <li><span class="list-dot" aria-hidden="true"></span><div><span class="list-label">التحقق من الهوية:</span> تسجيل الدخول الآمن وإدارة أدوار المستخدمين وصلاحياتهم.</div></li>
+        <li><span class="list-dot" aria-hidden="true"></span><div><span class="list-label">توثيق وحساب الإنتاجية:</span> تسجيل المهام اليومية وحساب نسب الإنجاز ومتابعة الأداء.</div></li>
+        <li><span class="list-dot" aria-hidden="true"></span><div><span class="list-label">توليد التقارير:</span> إنشاء تقارير إحصائية وصورية لمستوى الإنتاجية لدعم المتابعة الإدارية.</div></li>
+        <li><span class="list-dot" aria-hidden="true"></span><div><span class="list-label">الإشعارات والتنبيهات:</span> إرسال تذكيرات يومية عبر التطبيق بشأن تسجيل الإنتاجية ومتابعة المهام.</div></li>
+      </ul>
+    </section>
+
+    <section class="section-card fade-in" aria-labelledby="section-3-title">
+      <div class="section-header"><span class="section-number">3</span><h2 class="section-title" id="section-3-title">الأذونات المطلوبة على الجهاز</h2></div>
+      <p class="section-intro">يطلب التطبيق الأذونات التالية من جهازك لتقديم الوظائف الأساسية:</p>
+      <div class="perm-grid">
+        <article class="perm-item"><span class="perm-icon" aria-hidden="true">🗂️</span><h3 class="perm-name">التخزين والمعرض</h3><p class="perm-desc">لحفظ وتصدير صور تقارير الإنتاجية على جهازك (للمشرفين ورؤساء الأقسام فقط).</p></article>
+        <article class="perm-item"><span class="perm-icon" aria-hidden="true">📷</span><h3 class="perm-name">الكاميرا</h3><p class="perm-desc">لالتقاط صورة شخصية ورفعها إلى الملف الشخصي، عند طلبك فقط.</p></article>
+        <article class="perm-item"><span class="perm-icon" aria-hidden="true">🔔</span><h3 class="perm-name">الإشعارات</h3><p class="perm-desc">لإرسال التذكيرات اليومية المتعلقة بتسجيل الإنتاجية والعمل في الخلفية.</p></article>
+      </div>
+    </section>
+
+    <section class="section-card fade-in" aria-labelledby="section-4-title">
+      <div class="section-header"><span class="section-number">4</span><h2 class="section-title" id="section-4-title">تخزين وأمان البيانات</h2></div>
+      <ul class="policy-list">
+        <li><span class="list-dot" aria-hidden="true"></span><div><span class="list-label">التخزين المحلي (Room Database):</span> يُحتفظ بنسخة محلية مؤقتة من بعض بيانات الملف الشخصي لتسهيل استخدام التطبيق.</div></li>
+        <li><span class="list-dot" aria-hidden="true"></span><div><span class="list-label">التخزين السحابي (Firebase Firestore وAuth):</span> تُخزَّن بيانات الحساب والبيانات اللازمة للتطبيق عبر خدمات Firebase.</div></li>
+        <li><span class="list-dot" aria-hidden="true"></span><div><span class="list-label">حماية البيانات:</span> نطبق تدابير أمنية تقنية وإدارية للحد من الوصول غير المصرح به وحماية البيانات.</div></li>
+      </ul>
+      <div class="security-row" aria-label="وسائل الأمان والتخزين">
+        <span class="sec-badge">🔒 HTTPS / SSL</span>
+        <span class="sec-badge">🛡️ Firebase Auth</span>
+        <span class="sec-badge">☁️ Firestore</span>
+        <span class="sec-badge">💾 Room DB Local Cache</span>
+      </div>
+    </section>
+
+    <section class="section-card fade-in" aria-labelledby="section-5-title">
+      <div class="section-header"><span class="section-number">5</span><h2 class="section-title" id="section-5-title">مشاركة البيانات مع أطراف خارجية</h2></div>
+      <div class="highlight-box"><span class="highlight-icon" aria-hidden="true">🚫</span><p class="highlight-text">لا نقوم ببيع أو تأجير أو مشاركة بياناتك الشخصية مع جهات تجارية خارجية.</p></div>
+      <p class="section-intro">تُعالج البيانات عبر خدمات Google Firebase لأغراض المصادقة وقواعد البيانات السحابية وتشغيل وظائف التطبيق. وتخضع معالجة البيا��ات لشروط وسياسات مزوّد الخدمة.</p>
+    </section>
+
+    <section class="section-card fade-in" aria-labelledby="section-6-title">
+      <div class="section-header"><span class="section-number">6</span><h2 class="section-title" id="section-6-title">حقوق المستخدم وحذف البيانات</h2></div>
+      <p class="section-intro">يحق للمستخدم في أي وقت:</p>
+      <ol class="policy-list numbered-list">
+        <li>الاطلاع على البيانات الشخصية المسجلة داخل صفحة الملف الشخصي.</li>
+        <li>طلب تغيير كلمة المرور أو تحديث البيانات الشخصية.</li>
+        <li>طلب حذف الحساب أو البيانات من النظام عبر التواصل مع مسؤول النظام (Super Admin) أو فريق الدعم.</li>
+      </ol>
+    </section>
+
+    <section class="contact-card fade-in" aria-labelledby="contact-title">
+      <h2 class="contact-title" id="contact-title">📬 تواصل معنا</h2>
+      <p class="section-intro">إذا كانت لديك استفسارات أو طلبات تتعلق بحماية خصوصيتك، يمكنك التواصل معنا عبر:</p>
+      <div class="contact-links">
+        <a href="https://wa.me/201555666120" class="contact-link whatsapp" target="_blank" rel="noopener noreferrer"><span aria-hidden="true">💬</span> واتساب: +201555666120</a>
+        <a href="mailto:TTaMMeRR@Gmail.com" class="contact-link email"><span aria-hidden="true">✉️</span> TTaMMeRR@Gmail.com</a>
+      </div>
+    </section>
+  </main>
+
+  <footer><p>جميع الحقوق محفوظة &copy; 2026 <strong>WE Productivity</strong> &mdash; سياسة الخصوصية</p></footer>
+  <button class="scroll-top" id="scrollTopBtn" type="button" aria-label="العودة إلى أعلى الصفحة">↑</button>
+
+  <script>
+    const particleContainer = document.getElementById('particles');
+    const colors = ['rgba(0,198,255,', 'rgba(0,87,231,', 'rgba(123,47,247,', 'rgba(255,255,255,'];
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      for (let i = 0; i < 40; i++) {
+        const particle = document.createElement('span');
+        const size = Math.random() * 4 + 1;
+        const color = colors[Math.floor(Math.random() * colors.length)];
+        particle.className = 'particle';
+        particle.style.cssText = `width:${size}px;height:${size}px;background:${color}${Math.random() * .6 + .2});left:${Math.random() * 100}%;animation-duration:${Math.random() * 15 + 10}s;animation-delay:${Math.random() * 10}s`;
+        particleContainer.appendChild(particle);
       }
-    })();
+    }
+
+    const progressBar = document.getElementById('progressBar');
+    const scrollTopButton = document.getElementById('scrollTopBtn');
+    const updateScrollUI = () => {
+      const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+      progressBar.style.transform = `scaleX(${maxScroll > 0 ? window.scrollY / maxScroll : 0})`;
+      scrollTopButton.classList.toggle('visible', window.scrollY > 300);
+    };
+    window.addEventListener('scroll', updateScrollUI, { passive: true });
+    scrollTopButton.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+    updateScrollUI();
+
+    if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: .1 });
+      document.querySelectorAll('.fade-in').forEach((element) => observer.observe(element));
+    } else {
+      document.querySelectorAll('.fade-in').forEach((element) => element.classList.add('visible'));
+    }
   </script>
 </body>
 </html>
