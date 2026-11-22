@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>سياسة الخصوصية – WE Productivity</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap');
+
+    :root {
+      --primary: #0057e7;
+      --primary-dark: #003db3;
+      --accent: #00c6ff;
+      --accent2: #7b2ff7;
+      --bg: #0a0f1e;
+      --card-bg: rgba(255,255,255,0.04);
+      --card-border: rgba(255,255,255,0.08);
+      --text: #e8eaf6;
+      --muted: #8892b0;
+      --success: #00e676;
+      --warning: #ffd740;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Cairo', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.8;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ===== ANIMATED BACKGROUND ===== */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 20% 10%, rgba(0,87,231,0.18) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 50% at 80% 80%, rgba(123,47,247,0.15) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 40% at 50% 50%, rgba(0,198,255,0.08) 0%, transparent 60%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ===== PARTICLES ===== */
+    .particles {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .particle {
+      position: absolute;
+      border-radius: 50%;
+      animation: float linear infinite;
+      opacity: 0;
+    }
+
+    @keyframes float {
+      0%   { transform: translateY(100vh) scale(0); opacity: 0; }
+      10%  { opacity: 1; }
+      90%  { opacity: 0.6; }
+      100% { transform: translateY(-10vh) scale(1); opacity: 0; }
+    }
+
+    /* ===== HEADER ===== */
+    header {
+      position: relative;
+      z-index: 10;
+      text-align: center;
+      padding: 80px 20px 60px;
+      overflow: hidden;
+    }
+
+    .header-glow {
+      position: absolute;
+      top: -60px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 600px;
+      height: 300px;
+      background: radial-gradient(ellipse, rgba(0,198,255,0.2) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .logo-wrapper {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .logo-icon {
+      width: 64px;
+      height: 64px;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      border-radius: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+      box-shadow: 0 0 30px rgba(0,198,255,0.4), 0 0 60px rgba(0,87,231,0.2);
+      animation: pulse-glow 3s ease-in-out infinite;
+    }
+
+    @keyframes pulse-glow {
+      0%, 100% { box-shadow: 0 0 30px rgba(0,198,255,0.4), 0 0 60px rgba(0,87,231,0.2); }
+      50%       { box-shadow: 0 0 50px rgba(0,198,255,0.7), 0 0 90px rgba(0,87,231,0.4); }
+    }
+
+    .app-name {
+      font-size: clamp(28px, 5vw, 42px);
+      font-weight: 900;
+      background: linear-gradient(90deg, #fff 0%, var(--accent) 50%, var(--accent2) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: -1px;
+    }
+
+    h1.page-title {
+      font-size: clamp(22px, 4vw, 36px);
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 12px;
+    }
+
+    .update-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(0,230,118,0.1);
+      border: 1px solid rgba(0,230,118,0.3);
+      color: var(--success);
+      padding: 6px 18px;
+      border-radius: 100px;
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+
+    .update-badge::before {
+      content: '';
+      width: 8px;
+      height: 8px;
+      background: var(--success);
+      border-radius: 50%;
+      animation: blink 1.5s ease-in-out infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50%       { opacity: 0.2; }
+    }
+
+    .header-desc {
+      max-width: 600px;
+      margin: 0 auto;
+      color: var(--muted);
+      font-size: 16px;
+    }
+
+    /* ===== DIVIDER ===== */
+    .divider {
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+      margin: 0 auto 60px;
+      max-width: 800px;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* ===== MAIN CONTENT ===== */
+    main {
+      position: relative;
+      z-index: 2;
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 20px 100px;
+    }
+
+    /* ===== SECTION CARDS ===== */
+    .section-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 36px 40px;
+      margin-bottom: 28px;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+      backdrop-filter: blur(10px);
+    }
+
+    .section-card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(0,198,255,0.3);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3), 0 0 30px rgba(0,198,255,0.08);
+    }
+
+    .section-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      left: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--accent), var(--accent2), transparent);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .section-card:hover::before {
+      opacity: 1;
+    }
+
+    .section-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      border-radius: 12px;
+      font-size: 18px;
+      font-weight: 900;
+      color: #fff;
+      margin-left: 14px;
+      flex-shrink: 0;
+      box-shadow: 0 4px 15px rgba(0,87,231,0.4);
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 24px;
+      flex-direction: row-reverse;
+      justify-content: flex-end;
+    }
+
+    .section-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    /* ===== LIST ITEMS ===== */
+    ul.policy-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    ul.policy-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      flex-direction: row-reverse;
+      text-align: right;
+      color: rgba(232,234,246,0.85);
+      font-size: 15px;
+    }
+
+    ul.policy-list li:last-child {
+      border-bottom: none;
+    }
+
+    .list-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      flex-shrink: 0;
+      margin-top: 8px;
+    }
+
+    .list-label {
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    /* ===== PERMISSIONS GRID ===== */
+    .perm-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+    }
+
+    .perm-item {
+      background: rgba(0,87,231,0.08);
+      border: 1px solid rgba(0,87,231,0.2);
+      border-radius: 14px;
+      padding: 20px;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+
+    .perm-item:hover {
+      background: rgba(0,198,255,0.12);
+      border-color: rgba(0,198,255,0.4);
+      transform: scale(1.02);
+    }
+
+    .perm-icon {
+      font-size: 32px;
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    .perm-name {
+      font-weight: 700;
+      color: #fff;
+      font-size: 15px;
+      margin-bottom: 6px;
+    }
+
+    .perm-desc {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    /* ===== SECURITY BADGES ===== */
+    .security-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 10px;
+    }
+
+    .sec-badge {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(0,230,118,0.08);
+      border: 1px solid rgba(0,230,118,0.25);
+      border-radius: 100px;
+      padding: 8px 16px;
+      font-size: 13px;
+      color: var(--success);
+      font-weight: 600;
+    }
+
+    .sec-badge span {
+      font-size: 16px;
+    }
+
+    /* ===== HIGHLIGHT BOX ===== */
+    .highlight-box {
+      background: linear-gradient(135deg, rgba(123,47,247,0.12), rgba(0,87,231,0.12));
+      border: 1px solid rgba(123,47,247,0.3);
+      border-radius: 14px;
+      padding: 20px 24px;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      flex-direction: row-reverse;
+    }
+
+    .highlight-icon {
+      font-size: 28px;
+      flex-shrink: 0;
+    }
+
+    .highlight-text {
+      color: rgba(232,234,246,0.9);
+      font-size: 15px;
+      font-weight: 600;
+    }
+
+    /* ===== CONTACT CARD ===== */
+    .contact-card {
+      background: linear-gradient(135deg, rgba(0,87,231,0.15), rgba(0,198,255,0.08));
+      border: 1px solid rgba(0,198,255,0.25);
+      border-radius: 20px;
+      padding: 36px 40px;
+      text-align: center;
+      margin-bottom: 28px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .contact-card::after {
+      content: '';
+      position: absolute;
+      bottom: -40px;
+      right: -40px;
+      width: 200px;
+      height: 200px;
+      background: radial-gradient(circle, rgba(0,198,255,0.1) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .contact-title {
+      font-size: 22px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 24px;
+    }
+
+    .contact-links {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .contact-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 28px;
+      border-radius: 100px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 15px;
+      font-family: 'Cairo', sans-serif;
+      transition: all 0.3s ease;
+    }
+
+    .contact-link.whatsapp {
+      background: linear-gradient(135deg, #25D366, #128C7E);
+      color: #fff;
+      box-shadow: 0 4px 20px rgba(37,211,102,0.3);
+    }
+
+    .contact-link.whatsapp:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(37,211,102,0.5);
+    }
+
+    .contact-link.email {
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      color: #fff;
+      box-shadow: 0 4px 20px rgba(0,87,231,0.3);
+    }
+
+    .contact-link.email:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(0,87,231,0.5);
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 30px 20px 50px;
+      color: var(--muted);
+      font-size: 13px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+
+    footer strong {
+      color: var(--accent);
+    }
+
+    /* ===== SCROLL TO TOP ===== */
+    .scroll-top {
+      position: fixed;
+      bottom: 30px;
+      left: 30px;
+      width: 48px;
+      height: 48px;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 4px 20px rgba(0,87,231,0.4);
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.3s ease;
+      z-index: 999;
+      border: none;
+      font-size: 20px;
+      color: #fff;
+    }
+
+    .scroll-top.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .scroll-top:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 30px rgba(0,87,231,0.6);
+    }
+
+    /* ===== PROGRESS BAR ===== */
+    .progress-bar {
+      position: fixed;
+      top: 0;
+      right: 0;
+      left: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--primary), var(--accent), var(--accent2));
+      transform-origin: right;
+      transform: scaleX(0);
+      z-index: 1000;
+      transition: transform 0.1s linear;
+    }
+
+    /* ===== GENERAL TEXT ===== */
+    .section-intro {
+      color: rgba(232,234,246,0.8);
+      font-size: 15px;
+      margin-bottom: 20px;
+      text-align: right;
+      direction: rtl;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 600px) {
+      .section-card {
+        padding: 24px 20px;
+      }
+
+      .perm-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .contact-links {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .contact-link {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+
+    /* ===== FADE IN ANIMATION ===== */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Progress Bar -->
+  <div class="progress-bar" id="progressBar"></div>
+
+  <!-- Particles -->
+  <div class="particles" id="particles"></div>
+
+  <!-- Header -->
+  <header>
+    <div class="header-glow"></div>
+
+    <div class="logo-wrapper">
+      <div class="logo-icon">⚡</div>
+      <div class="app-name">WE Productivity</div>
+    </div>
+
+    <div class="update-badge">آخر تحديث: 26 فبراير 2026</div>
+
+    <h1 class="page-title">سياسة الخصوصية</h1>
+    <p class="header-desc">
+      نلتزم بحماية خصوصيتك وأمان بياناتك. تعرّف على كيفية جمع واستخدام وحماية معلوماتك.
+    </p>
+  </header>
+
+  <div class="divider"></div>
+
+  <main>
+
+    <!-- Section 1: Data Collected -->
+    <div class="section-card fade-in">
+      <div class="section-header">
+        <div class="section-number">1</div>
+        <h2 class="section-title">البيانات التي نقوم بجمعها</h2>
+      </div>
+      <p class="section-intro">
+        يقوم التطبيق بجمع وتجهيز البيانات التالية لضمان تقديم خدمات إدارة وتوثيق الإنتاجية بكفاءة:
+      </p>
+      <ul class="policy-list">
+        <li>
+          <div class="list-dot"></div>
+          <div><span class="list-label">بيانات الحساب والهوية: </span>اسم المستخدم، رقم العامل (Worker ID)، البريد الإلكتروني، رقم الهاتف، والدور الوظيفي.</div>
+        </li>
+        <li>
+          <div class="list-dot"></div>
+          <div><span class="list-label">بيانات إدخال الإنتاجية: </span>اسم السنترال، تصنيف العمل، نوع المهمة، وصف الإنجاز، الكميات المنفذة، وتواريخ التسجيل.</div>
+        </li>
+        <li>
+          <div class="list-dot"></div>
+          <div><span class="list-label">الصورة الشخصية (اختياري): </span>في حال قام المستخدم برفع صورة شخصية لملفه الشخصي.</div>
+        </li>
+        <li>
+          <div class="list-dot"></div>
+          <div><span class="list-label">بيانات الجهاز والتشغيل: </span>سجلات الأخطاء والتقارير البرمجية الفنية لضمان استقرار التطبيق.</div>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Section 2: Data Usage -->
+    <div class="section-card fade-in">
+      <div class="section-header">
+        <div class="section-number">2</div>
+        <h2 class="section-title">كيفية استخدام البيانات</h2>
+      </div>
+      <p class="section-intro">
+        نستخدم البيانات التي نجمعها للأغراض التشغيلية والإدارية التالية فقط:
+      </p>
+      <ul class="policy-list">
+        <li>
+          <div class="list-dot"></div>
+          <div><span class="list-label">التحقق من الهوية: </span>تسجيل الدخول الآمن وإدارة أدوار وصلاحيات المستخدمين.</div>
+        </li>
+        <li>
+          <div class="list-dot"></div>
+          <div><span class="list-label">توثيق وحساب الإنتاجية: </span>تسجيل المهام اليومية وحساب نسبة الإنجاز الشهري والأيام غير المسجلة (الحيود).</div>
+        </li>
+        <li>
+          <div class="list-dot"></div>
+          <div><span class="list-label">توليد التقارير: </span>إنشاء وإخراج تقارير إحصائية وصورية مجسمة (3D) لمستوى الأداء والحيود بالقطاعات والمناطق.</div>
+        </li>
+        <li>
+          <div class="list-dot"></div>
+          <div><span class="list-label">الإشعارات والتنبيهات: </span>إرسال تذكيرات يومية عبر التطبيق وتسجيل التنبيهات الخاصة بالمهام غير المعتمدة.</div>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Section 3: Permissions -->
+    <div class="section-card fade-in">
+      <div class="section-header">
+        <div class="section-number">3</div>
+        <h2 class="section-title">الأذونات المطلوبة على الجهاز</h2>
+      </div>
+      <p class="section-intro">يطلب التطبيق الأذونات التالية من جهازك لتقديم الوظائف الأساسية:</p>
+      <div class="perm-grid">
+        <div class="perm-item">
+          <span class="perm-icon">🗂️</span>
+          <div class="perm-name">التخزين والمعرض</div>
+          <div class="perm-desc">لحفظ وتصدير صور تقارير الإنتاجية على جهازك (للمشرفين ورؤساء الأقسام فقط)</div>
+        </div>
+        <div class="perm-item">
+          <span class="perm-icon">📷</span>
+          <div class="perm-name">الكاميرا</div>
+          <div class="perm-desc">التقاط صورة شخصية جديدة لرفعها في الملف الشخصي (عند طلبك فقط)</div>
+        </div>
+        <div class="perm-item">
+          <span class="perm-icon">🔔</span>
+          <div class="perm-name">الإشعارات</div>
+          <div class="perm-desc">لإرسال التذكيرات اليومية الهامة لتسجيل الإنتاجية والعمل في الخلفية</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 4: Security -->
+    <div class="section-card fade-in">
+      <div class="section-header">
+        <div class="section-number">4</div>
+        <h2 class="section-title">تخزين وأمان البيانات</h2>
+      </div>
+      <ul class="policy-list">
+        <li>
+          <div class="list-dot"></div>
+          <div><span class="list-label">التخزين المحلي (Room Database): </span>يتم الاحتفاظ بكاش محلي لبيانات ملفك الشخصي لتسريع فتح الشاشات بدون استهلاك متكرر للإنترنت.</div>
+        </li>
+        <li>
+          <div class="list-dot"></div>
+          <div><span class="list-label">التخزين السحابي (Firebase Firestore & Auth): </span>تُشفَّر وتُخزَّن كافة البيانات السحابية باستخدام بروتوكولات التشفير القياسية (HTTPS / SSL).</div>
+        </li>
+        <li>
+          <div class="list-dot"></div>
+          <div><span class="list-label">حماية البيانات: </span>نطبق تدابير أمنية تقنية وإدارية صارمة لمنع الوصول غير المصرح به أو تعديل أو تسريب بياناتك.</div>
+        </li>
+      </ul>
+      <div class="security-row">
+        <div class="sec-badge"><span>🔒</span>HTTPS / SSL</div>
+        <div class="sec-badge"><span>🛡️</span>Firebase Auth</div>
+        <div class="sec-badge"><span>☁️</span>Firestore Encrypted</div>
+        <div class="sec-badge"><span>💾</span>Room DB Local Cache</div>
+      </div>
+    </div>
+
+    <!-- Section 5: Third Party -->
+    <div class="section-card fade-in">
+      <div class="section-header">
+        <div class="section-number">5</div>
+        <h2 class="section-title">مشاركة البيانات مع أطراف خارجية</h2>
+      </div>
+      <div class="highlight-box">
+        <div class="highlight-icon">🚫</div>
+        <div class="highlight-text">
+          لا نقوم ببيع أو تأجير أو مشاركة بياناتك الشخصية مع أي جهات تجارية خارجية.
+        </div>
+      </div>
+      <p class="section-intro">
+        تُعالج البيانات حصرًا عبر خدمات <strong>Google Firebase</strong> الموثوقة لأغراض المصادقة وقواعد البيانات السحابية والتنبيهات.
+      </p>
+    </div>
+
+    <!-- Section 6: User Rights -->
+    <div class="section-card fade-in">
+      <div class="section-header">
+        <div class="section-number">6</div>
+        <h2 class="section-title">حقوق المستخدم وحذف البيانات</h2>
+      </div>
+      <p class="section-intro">يحق للمستخدم في أي وقت:</p>
+      <ul class="policy-list">
+        <li>
+          <div class="list-dot"></div>
+          <div>الاطلاع على كافة بياناته الشخصية المسجلة داخل صفحة الملف الشخصي.</div>
+        </li>
+        <li>
+          <div class="list-dot"></div>
+          <div>طلب تغيير كلمة المرور أو تحديث بياناته الشخصية.</div>
+        </li>
+        <li>
+          <div class="list-dot"></div>
+          <div>طلب حذف حسابه أو حذف بياناته من النظام عبر التواصل مع مسؤول النظام (Super Admin) أو فريق الدعم الفني.</div>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Section 7: Contact -->
+    <div class="contact-card fade-in">
+      <div class="contact-title">📬 تواصل معنا</div>
+      <p class="section-intro" style="margin-bottom: 28px; color: rgba(232,234,246,0.7);">
+        إذا كان لديك أي استفسارات أو طلبات تزيد من حماية خصوصيتك، يمكنك التواصل معنا عبر:
+      </p>
+      <div class="contact-links">
+        <a href="https://wa.me/201555666120" class="contact-link whatsapp" target="_blank" rel="noopener">
+          <span>💬</span> واتساب: +201555666120
+        </a>
+        <a href="mailto:TTaMMeRR@Gmail.com" class="contact-link email">
+          <span>✉️</span> TTaMMeRR@Gmail.com
+        </a>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>جميع الحقوق محفوظة &copy; 2026 <strong>WE Productivity</strong> &mdash; سياسة الخصوصية</p>
+  </footer>
+
+  <!-- Scroll to Top -->
+  <button class="scroll-top" id="scrollTopBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+  <script>
+    // ===== PARTICLES =====
+    const container = document.getElementById('particles');
+    const colors = ['rgba(0,198,255,', 'rgba(0,87,231,', 'rgba(123,47,247,', 'rgba(255,255,255,'];
+    for (let i = 0; i < 40; i++) {
+      const p = document.createElement('div');
+      p.className = 'particle';
+      const size = Math.random() * 4 + 1;
+      const color = colors[Math.floor(Math.random() * colors.length)];
+      p.style.cssText = `
+        width: ${size}px;
+        height: ${size}px;
+        background: ${color}${Math.random() * 0.6 + 0.2})};
+        left: ${Math.random() * 100}%;
+        animation-duration: ${Math.random() * 15 + 10}s;
+        animation-delay: ${Math.random() * 10}s;
+      `;
+      container.appendChild(p);
+    }
+
+    // ===== SCROLL PROGRESS BAR =====
+    const bar = document.getElementById('progressBar');
+    const btn = document.getElementById('scrollTopBtn');
+    window.addEventListener('scroll', () => {
+      const scrolled = window.scrollY;
+      const total = document.documentElement.scrollHeight - window.innerHeight;
+      const pct = total > 0 ? scrolled / total : 0;
+      bar.style.transform = `scaleX(${pct})`;
+      btn.classList.toggle('visible', scrolled > 300);
+    });
+
+    // ===== FADE IN ON SCROLL =====
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
