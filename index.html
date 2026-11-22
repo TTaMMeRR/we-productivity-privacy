@@ -104,18 +104,14 @@
       margin-bottom: 24px;
     }
 
-    .logo-icon {
-      width: 64px;
-      height: 64px;
-      background: linear-gradient(135deg, var(--primary), var(--accent));
-      border-radius: 18px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 32px;
-      box-shadow: 0 0 30px rgba(0,198,255,0.4), 0 0 60px rgba(0,87,231,0.2);
-      animation: pulse-glow 3s ease-in-out infinite;
-    }
+    .logo-img {
+  width: 64px;
+  height: 64px;
+  border-radius: 18px; /* نفس انحناء المربع القديم */
+  object-fit: cover;    /* يخلي الصورة تملأ المكان بدون تشويه */
+  box-shadow: 0 0 30px rgba(0,198,255,0.4), 0 0 60px rgba(0,87,231,0.2); /* نفس التوهج القديم */
+  animation: pulse-glow 3s ease-in-out infinite; /* نفس حركة النبض القديمة */
+}
 
     @keyframes pulse-glow {
       0%, 100% { box-shadow: 0 0 30px rgba(0,198,255,0.4), 0 0 60px rgba(0,87,231,0.2); }
@@ -578,7 +574,7 @@
       <div class="app-name">WeProductivity</div>
     </div>
 
-    <div class="update-badge">آخر تحديث: 26 فبراير 2026</div>
+    <div class="update-badge">آخر تحديث: 1 نوفمبر 2025</div>
 
     <h1 class="page-title">سياسة الخصوصية</h1>
     <p class="header-desc">
