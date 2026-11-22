@@ -1,1 +1,80 @@
-placeholder
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>سياسة الخصوصية – WeProductivity</title>
+  <style>
+    :root { color-scheme: dark; }
+    html, body { min-height: 100%; margin: 0; }
+    body {
+      display: grid;
+      place-items: center;
+      padding: 2rem;
+      background: #0a0f1e;
+      color: #e8eaf6;
+      font-family: sans-serif;
+      text-align: center;
+      line-height: 1.8;
+    }
+    p { max-width: 38rem; }
+  </style>
+</head>
+<body dir="rtl">
+  <main>
+    <h1>جاري استعادة سياسة الخصوصية…</h1>
+    <p id="status">يتم تحميل النسخة الأصلية من الصفحة.</p>
+  </main>
+  <script>
+    (async () => {
+      const sourceUrl = 'https://raw.githubusercontent.com/TTaMMeRR/we-productivity-privacy/38461c4ec1f40f1f9158d3a4cdad35a888c87c4b/index.html';
+      const status = document.getElementById('status');
+      try {
+        const response = await fetch(sourceUrl, { cache: 'no-store' });
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        let html = await response.text();
+
+        // Drop the broad, duplicated RTL rule and replace the old trailing overrides.
+        html = html.replace(/\s*main\s*\*\s*\{\s*direction:\s*rtl;\s*text-align:\s*right;\s*\}/, '');
+        const oldOverrides = /\/\* ===== إجبار اتجاه RTL في المحتوى ===== \*\/[\s\S]*?(?=<\/style>)/;
+        const rtlRules = `
+    /* RTL layout: isolated, predictable rules for the page content. */
+    html, body, main { direction: rtl; }
+    main { text-align: right; }
+    main .section-card, main .contact-card, main .highlight-box { text-align: right; }
+    main .section-header {
+      direction: rtl;
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      align-items: center;
+      column-gap: 14px;
+      text-align: right;
+    }
+    main .section-number { margin: 0; }
+    main .section-title { text-align: right; }
+    main ul.policy-list, main ol { direction: rtl; text-align: right; }
+    main ul.policy-list li {
+      direction: rtl;
+      flex-direction: row;
+      text-align: right;
+    }
+    main ol {
+      list-style-position: inside;
+      padding-inline-start: 0;
+    }
+    main .section-intro, main .list-label { text-align: right; }
+`;
+        if (!oldOverrides.test(html)) throw new Error('Could not locate the RTL style section in the source page.');
+        html = html.replace(oldOverrides, rtlRules);
+        document.open();
+        document.write(html);
+        document.close();
+      } catch (error) {
+        status.textContent = 'تعذر تحميل النسخة الأصلية تلقائيًا. يرجى إعادة المحاولة أو استعادة الملف من سجل GitHub.';
+        console.error('Privacy page recovery failed:', error);
+      }
+    })();
+  </script>
+</body>
+</html>
