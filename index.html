@@ -28,11 +28,13 @@
     }
 
     html {
+      direction: rtl;
       scroll-behavior: smooth;
     }
 
     body {
       font-family: 'Cairo', sans-serif;
+      direction: rtl;
       background: var(--bg);
       color: var(--text);
       line-height: 1.8;
@@ -83,6 +85,7 @@
       text-align: center;
       padding: 80px 20px 60px;
       overflow: hidden;
+      direction: rtl;
     }
 
     .header-glow {
@@ -97,21 +100,23 @@
     }
 
     .logo-wrapper {
-      display: inline-flex;
+      display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 16px;
+      gap: 12px;
       margin-bottom: 24px;
+      direction: rtl;
     }
 
     .logo-img {
-  width: 64px;
-  height: 64px;
-  border-radius: 18px; /* نفس انحناء المربع القديم */
-  object-fit: cover;    /* يخلي الصورة تملأ المكان بدون تشويه */
-  box-shadow: 0 0 30px rgba(0,198,255,0.4), 0 0 60px rgba(0,87,231,0.2); /* نفس التوهج القديم */
-  animation: pulse-glow 3s ease-in-out infinite; /* نفس حركة النبض القديمة */
-}
+      width: 64px;
+      height: 64px;
+      border-radius: 18px;
+      object-fit: cover;
+      box-shadow: 0 0 30px rgba(0,198,255,0.4), 0 0 60px rgba(0,87,231,0.2);
+      animation: pulse-glow 3s ease-in-out infinite;
+    }
 
     @keyframes pulse-glow {
       0%, 100% { box-shadow: 0 0 30px rgba(0,198,255,0.4), 0 0 60px rgba(0,87,231,0.2); }
@@ -126,6 +131,7 @@
       -webkit-text-fill-color: transparent;
       background-clip: text;
       letter-spacing: -1px;
+      text-align: center;
     }
 
     h1.page-title {
@@ -133,6 +139,7 @@
       font-weight: 700;
       color: #fff;
       margin-bottom: 12px;
+      text-align: center;
     }
 
     .update-badge {
@@ -146,7 +153,7 @@
       border-radius: 100px;
       font-size: 14px;
       font-weight: 600;
-      margin-bottom: 20px;
+      margin-bottom: 0;
     }
 
     .update-badge::before {
@@ -165,9 +172,11 @@
 
     .header-desc {
       max-width: 600px;
-      margin: 0 auto;
+      margin: 20px auto 0;
       color: var(--muted);
       font-size: 16px;
+      text-align: center;
+      direction: rtl;
     }
 
     /* ===== DIVIDER ===== */
@@ -183,11 +192,18 @@
 
     /* ===== MAIN CONTENT ===== */
     main {
+      direction: rtl;
+      text-align: right;
       position: relative;
       z-index: 2;
       max-width: 860px;
       margin: 0 auto;
       padding: 0 20px 100px;
+    }
+
+    main * {
+      direction: rtl;
+      text-align: right;
     }
 
     /* ===== SECTION CARDS ===== */
@@ -199,6 +215,7 @@
       margin-bottom: 28px;
       position: relative;
       overflow: hidden;
+      text-align: right;
       transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
       backdrop-filter: blur(10px);
     }
@@ -247,12 +264,14 @@
       margin-bottom: 24px;
       flex-direction: row-reverse;
       justify-content: flex-end;
+      text-align: right;
     }
 
     .section-title {
       font-size: 20px;
       font-weight: 700;
       color: #fff;
+      text-align: right;
     }
 
     /* ===== LIST ITEMS ===== */
@@ -269,6 +288,7 @@
       border-bottom: 1px solid rgba(255,255,255,0.05);
       flex-direction: row-reverse;
       text-align: right;
+      direction: rtl;
       color: rgba(232,234,246,0.85);
       font-size: 15px;
     }
@@ -296,6 +316,7 @@
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 16px;
+      direction: rtl;
     }
 
     .perm-item {
@@ -303,7 +324,7 @@
       border: 1px solid rgba(0,87,231,0.2);
       border-radius: 14px;
       padding: 20px;
-      text-align: center;
+      text-align: right;
       transition: all 0.3s ease;
     }
 
@@ -317,6 +338,7 @@
       font-size: 32px;
       display: block;
       margin-bottom: 10px;
+      text-align: right;
     }
 
     .perm-name {
@@ -324,17 +346,20 @@
       color: #fff;
       font-size: 15px;
       margin-bottom: 6px;
+      text-align: right;
     }
 
     .perm-desc {
       color: var(--muted);
       font-size: 13px;
+      text-align: right;
     }
 
     /* ===== SECURITY BADGES ===== */
     .security-row {
       display: flex;
       flex-wrap: wrap;
+      justify-content: flex-end;
       gap: 12px;
       margin-top: 10px;
     }
@@ -367,6 +392,7 @@
       align-items: flex-start;
       gap: 14px;
       flex-direction: row-reverse;
+      text-align: right;
     }
 
     .highlight-icon {
@@ -378,6 +404,7 @@
       color: rgba(232,234,246,0.9);
       font-size: 15px;
       font-weight: 600;
+      text-align: right;
     }
 
     /* ===== CONTACT CARD ===== */
@@ -386,7 +413,7 @@
       border: 1px solid rgba(0,198,255,0.25);
       border-radius: 20px;
       padding: 36px 40px;
-      text-align: center;
+      text-align: right;
       margin-bottom: 28px;
       position: relative;
       overflow: hidden;
@@ -408,11 +435,12 @@
       font-weight: 700;
       color: #fff;
       margin-bottom: 24px;
+      text-align: right;
     }
 
     .contact-links {
       display: flex;
-      justify-content: center;
+      justify-content: flex-end;
       flex-wrap: wrap;
       gap: 16px;
     }
@@ -535,7 +563,7 @@
 
       .contact-links {
         flex-direction: column;
-        align-items: center;
+        align-items: stretch;
       }
 
       .contact-link {
@@ -555,6 +583,27 @@
       opacity: 1;
       transform: translateY(0);
     }
+
+    /* ===== إجبار اتجاه RTL في المحتوى ===== */
+    main {
+      direction: rtl;
+      text-align: right;
+    }
+
+    main * {
+      direction: rtl;
+      text-align: right;
+    }
+
+    main .section-card,
+    main .contact-card,
+    main .highlight-box {
+      text-align: right;
+    }
+
+    main .section-header {
+      justify-content: flex-end;
+    }
   </style>
 </head>
 <body>
@@ -570,11 +619,10 @@
     <div class="header-glow"></div>
 
     <div class="logo-wrapper">
-  <img src="icon.png" alt="Logo" class="logo-img">
+      <img src="icon.png" alt="Logo" class="logo-img">
       <div class="app-name">WeProductivity</div>
+      <div class="update-badge">آخر تحديث: 1 نوفمبر 2025</div>
     </div>
-
-    <div class="update-badge">آخر تحديث: 1 نوفمبر 2025</div>
 
     <h1 class="page-title">سياسة الخصوصية</h1>
     <p class="header-desc">
@@ -596,22 +644,10 @@
         يقوم التطبيق بجمع وتجهيز البيانات التالية لضمان تقديم خدمات إدارة وتوثيق الإنتاجية بكفاءة:
       </p>
       <ul class="policy-list">
-        <li>
-          <div class="list-dot"></div>
-          <div><span class="list-label">بيانات الحساب والهوية: </span>اسم المستخدم، رقم العامل (Worker ID)، البريد الإلكتروني، رقم الهاتف، والدور الوظيفي.</div>
-        </li>
-        <li>
-          <div class="list-dot"></div>
-          <div><span class="list-label">بيانات إدخال الإنتاجية: </span>اسم السنترال، تصنيف العمل، نوع المهمة، وصف الإنجاز، الكميات المنفذة، وتواريخ التسجيل.</div>
-        </li>
-        <li>
-          <div class="list-dot"></div>
-          <div><span class="list-label">الصورة الشخصية (اختياري): </span>في حال قام المستخدم برفع صورة شخصية لملفه الشخصي.</div>
-        </li>
-        <li>
-          <div class="list-dot"></div>
-          <div><span class="list-label">بيانات الجهاز والتشغيل: </span>سجلات الأخطاء والتقارير البرمجية الفنية لضمان استقرار التطبيق.</div>
-        </li>
+        <li><div class="list-dot"></div><div><span class="list-label">بيانات الحساب والهوية: </span>اسم المستخدم، رقم العامل (Worker ID)، البريد الإلكتروني، رقم الهاتف، البيانات الوظيفية والقسم.</div></li>
+        <li><div class="list-dot"></div><div><span class="list-label">بيانات إدخال الإنتاجية: </span>اسم السنترال، تصنيف العمل، نوع المهمة، وصف الإنجاز، الكميات المنفذة، ساعات العمل والتواريخ المسجلة.</div></li>
+        <li><div class="list-dot"></div><div><span class="list-label">الصورة الشخصية (اختياري): </span>في حال قام المستخدم برفع صورة شخصية لملفه الشخصي.</div></li>
+        <li><div class="list-dot"></div><div><span class="list-label">بيانات الجهاز والتشغيل: </span>سجلات الأخطاء والتقارير البرمجية الفنية لضمان استقرار التطبيق وتحسين الأداء.</div></li>
       </ul>
     </div>
 
@@ -625,22 +661,10 @@
         نستخدم البيانات التي نجمعها للأغراض التشغيلية والإدارية التالية فقط:
       </p>
       <ul class="policy-list">
-        <li>
-          <div class="list-dot"></div>
-          <div><span class="list-label">التحقق من الهوية: </span>تسجيل الدخول الآمن وإدارة أدوار وصلاحيات المستخدمين.</div>
-        </li>
-        <li>
-          <div class="list-dot"></div>
-          <div><span class="list-label">توثيق وحساب الإنتاجية: </span>تسجيل المهام اليومية وحساب نسبة الإنجاز الشهري والأيام غير المسجلة (الحيود).</div>
-        </li>
-        <li>
-          <div class="list-dot"></div>
-          <div><span class="list-label">توليد التقارير: </span>إنشاء وإخراج تقارير إحصائية وصورية مجسمة (3D) لمستوى الأداء والحيود بالقطاعات والمناطق.</div>
-        </li>
-        <li>
-          <div class="list-dot"></div>
-          <div><span class="list-label">الإشعارات والتنبيهات: </span>إرسال تذكيرات يومية عبر التطبيق وتسجيل التنبيهات الخاصة بالمهام غير المعتمدة.</div>
-        </li>
+        <li><div class="list-dot"></div><div><span class="list-label">التحقق من الهوية: </span>تسجيل الدخول الآمن وإدارة أدوار وصلاحيات المستخدمين.</div></li>
+        <li><div class="list-dot"></div><div><span class="list-label">توثيق وحساب الإنتاجية: </span>تسجيل المهام اليومية وحساب نسبة الإنجاز الشهري والأيام غير المنتجة.</div></li>
+        <li><div class="list-dot"></div><div><span class="list-label">توليد التقارير: </span>إنشاء وإخراج تقارير إحصائية وصورية مجسمة (3D) لمستوى الأداء والحيود بين الأقسام.</div></li>
+        <li><div class="list-dot"></div><div><span class="list-label">الإشعارات والتنبيهات: </span>إرسال تذكيرات يومية عبر التطبيق وتسجيل التنبيهات الخاصة بالمستخدم.</div></li>
       </ul>
     </div>
 
@@ -677,18 +701,9 @@
         <h2 class="section-title">تخزين وأمان البيانات</h2>
       </div>
       <ul class="policy-list">
-        <li>
-          <div class="list-dot"></div>
-          <div><span class="list-label">التخزين المحلي (Room Database): </span>يتم الاحتفاظ بكاش محلي لبيانات ملفك الشخصي لتسريع فتح الشاشات بدون استهلاك متكرر للإنترنت.</div>
-        </li>
-        <li>
-          <div class="list-dot"></div>
-          <div><span class="list-label">التخزين السحابي (Firebase Firestore & Auth): </span>تُشفَّر وتُخزَّن كافة البيانات السحابية باستخدام بروتوكولات التشفير القياسية (HTTPS / SSL).</div>
-        </li>
-        <li>
-          <div class="list-dot"></div>
-          <div><span class="list-label">حماية البيانات: </span>نطبق تدابير أمنية تقنية وإدارية صارمة لمنع الوصول غير المصرح به أو تعديل أو تسريب بياناتك.</div>
-        </li>
+        <li><div class="list-dot"></div><div><span class="list-label">التخزين المحلي (Room Database): </span>يتم الاحتفاظ بكاش محلي لبيانات ملفك الشخصي لتسريع فتح التطبيق على الجهاز.</div></li>
+        <li><div class="list-dot"></div><div><span class="list-label">التخزين السحابي (Firebase Firestore &amp; Auth): </span>تُشفَّر وتُخزَّن كافة البيانات السحابية باستخدام بروتوكولات تشفير آمنة (HTTPS / SSL).</div></li>
+        <li><div class="list-dot"></div><div><span class="list-label">حماية البيانات: </span>نطبق تدابير أمنية تقنية وإدارية صارمة لمنع الوصول غير المصرح به أو التلف أو الاستخدام غير المشروع.</div></li>
       </ul>
       <div class="security-row">
         <div class="sec-badge"><span>🔒</span>HTTPS / SSL</div>
@@ -711,7 +726,7 @@
         </div>
       </div>
       <p class="section-intro">
-        تُعالج البيانات حصرًا عبر خدمات <strong>Google Firebase</strong> الموثوقة لأغراض المصادقة وقواعد البيانات السحابية والتنبيهات.
+        تُعالج البيانات حصرًا عبر خدمات <strong>Google Firebase</strong> الموثوقة لأغراض المصادقة وقواعد البيانات السحابية والإشعارات.
       </p>
     </div>
 
@@ -723,18 +738,9 @@
       </div>
       <p class="section-intro">يحق للمستخدم في أي وقت:</p>
       <ul class="policy-list">
-        <li>
-          <div class="list-dot"></div>
-          <div>الاطلاع على كافة بياناته الشخصية المسجلة داخل صفحة الملف الشخصي.</div>
-        </li>
-        <li>
-          <div class="list-dot"></div>
-          <div>طلب تغيير كلمة المرور أو تحديث بياناته الشخصية.</div>
-        </li>
-        <li>
-          <div class="list-dot"></div>
-          <div>طلب حذف حسابه أو حذف بياناته من النظام عبر التواصل مع مسؤول النظام (Super Admin) أو فريق الدعم الفني.</div>
-        </li>
+        <li><div class="list-dot"></div><div>الاطلاع على كافة بياناته الشخصية المسجلة داخل صفحة الملف الشخصي.</div></li>
+        <li><div class="list-dot"></div><div>طلب تغيير كلمة المرور أو تحديث بياناته الشخصية.</div></li>
+        <li><div class="list-dot"></div><div>طلب حذف حسابه أو حذف بياناته من النظام عبر التواصل مع مسؤول النظام (Super Admin) أو فريق الدعم الفني.</div></li>
       </ul>
     </div>
 
@@ -742,15 +748,11 @@
     <div class="contact-card fade-in">
       <div class="contact-title">📬 تواصل معنا</div>
       <p class="section-intro" style="margin-bottom: 28px; color: rgba(232,234,246,0.7);">
-        إذا كان لديك أي استفسارات أو طلبات تزيد من حماية خصوصيتك، يمكنك التواصل معنا عبر:
+        إذا كان لديك أي استفسارات أو طلبات تتعلق بحماية خصوصيتك، يمكنك التواصل معنا عبر:
       </p>
       <div class="contact-links">
-        <a href="https://wa.me/201555666120" class="contact-link whatsapp" target="_blank" rel="noopener">
-          <span>💬</span> واتساب: +201555666120
-        </a>
-        <a href="mailto:TTaMMeRR@Gmail.com" class="contact-link email">
-          <span>✉️</span> TTaMMeRR@Gmail.com
-        </a>
+        <a href="https://wa.me/201555666120" class="contact-link whatsapp" target="_blank" rel="noopener"><span>💬</span> واتساب: +201555666120</a>
+        <a href="mailto:TTaMMeRR@Gmail.com" class="contact-link email"><span>✉️</span> TTaMMeRR@Gmail.com</a>
       </div>
     </div>
 
